@@ -10,9 +10,10 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-secret-key-change-in-production'
     
-    # Database path - use instance folder for SQLite
+    # Database path - ensure instance folder exists
+    instance_path = os.path.join(BASE_DIR, 'instance')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(BASE_DIR, 'instance', 'secure_vault.db')
+        f'sqlite:///{os.path.join(instance_path, "secure_vault.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
@@ -26,6 +27,7 @@ class Config:
     PERMANENT_SESSION_LIFETIME = timedelta(days=7)
     SESSION_COOKIE_SECURE = False  # Set True in production with HTTPS
     SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
 
 class DevelopmentConfig(Config):
     DEBUG = True
