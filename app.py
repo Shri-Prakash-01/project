@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 from functools import wraps
 import uuid
 import re
-
+# Add at the top with other imports
+from werkzeug.exceptions import abort
 from config import config
 from models import db, User, Document, ActivityLog, generate_share_token
 from utils.security import get_device_info, check_device_restriction, format_file_size, is_allowed_file, get_file_extension
