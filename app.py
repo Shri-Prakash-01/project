@@ -701,3 +701,6 @@ def create_app(config_name=None):
 if __name__ == '__main__':
     app = create_app()
     app.run(debug=True, port=8000, host='0.0.0.0')
+    
+# Add this at the bottom of app.py
+app = create_app()
